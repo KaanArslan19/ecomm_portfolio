@@ -22,7 +22,9 @@
       "@/*": ["./*"],
       "@hooks/*": ["./app/hooks/*"],
       "@types/*": ["./app/types/*"],
-      "@components/*": ["./app/components/*"]
+      "@components/*": ["./app/components/*"],
+      "@models/*": ["./app/models/*"],
+      "@lib/*": ["./app/lib/*"]
     }
   },
   "include": [
