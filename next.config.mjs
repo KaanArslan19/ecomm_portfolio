@@ -6,6 +6,8 @@ const nextConfig = {
     MAILTRAP_AUTH_USER: process.env.MAILTRAP_AUTH_USER,
     MAILTRAP_HOST: process.env.MAILTRAP_HOST,
     NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
+    PASSWORD_RESET_URL: process.env.PASSWORD_RESET_URL,
+    SIGN_IN_URL: process.env.SIGN_IN_URL,
   },
 };
 
