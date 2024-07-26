@@ -16,6 +16,7 @@ const validationSchema = yup.object().shape({
     .min(8, "Password must be at least 8 characters.")
     .required("Password is required!"),
 });
+
 export default function SignUp() {
   const formErrors: string[] = [];
   const {
@@ -31,7 +32,6 @@ export default function SignUp() {
     validationSchema,
     onSubmit: async (values, action) => {
       action.setSubmitting(true);
-      console.log(values);
       const res = await fetch("/api/users", {
         method: "POST",
         headers: {
@@ -40,12 +40,12 @@ export default function SignUp() {
         body: JSON.stringify(values),
       });
 
-      const { message, error } = await res.json();
-      console.log(message);
+      const { message, error } = (await res.json()) as {
+        message: string;
+        error: string;
+      };
       if (res.ok) {
         toast.success(message);
-        console.log(message);
-        // await signIn("credentials", { email, password });
       }
       if (!res.ok || error) {
         toast.error(error);
