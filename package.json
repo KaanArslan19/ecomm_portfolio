@@ -18,11 +18,12 @@
     "heroicons": "^2.1.5",
     "mongoose": "^8.5.1",
     "next": "14.2.5",
-    "next-auth": "^4.24.7",
+    "next-auth": "^5.0.0-beta.17",
     "nodemailer": "^6.9.14",
     "react": "^18",
     "react-dom": "^18",
     "react-toastify": "^10.0.5",
+    "truncate": "^3.0.0",
     "yup": "^1.4.0"
   },
   "devDependencies": {

@@ -1,15 +1,20 @@
 import React, { ReactNode } from "react";
-import { authOptions } from "../api/auth/[...nextauth]/route";
-import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
+import { auth } from "@/auth";
+import Navbar from "../components/navbar";
 interface Props {
   children: ReactNode;
 }
 export default async function GuessLayout({ children }: Props) {
-  const session = await getServerSession(authOptions);
+  const session = await auth();
 
   if (session) {
     return redirect("/");
   }
-  return <div>{children}</div>;
+  return (
+    <div>
+      <Navbar />
+      {children}
+    </div>
+  );
 }

@@ -7,6 +7,7 @@ import { XMarkIcon } from "@heroicons/react/24/outline";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { toast } from "react-toastify";
+import { signIn } from "next-auth/react";
 
 const validationSchema = yup.object().shape({
   name: yup.string().required("Name is required!"),
@@ -46,6 +47,7 @@ export default function SignUp() {
       };
       if (res.ok) {
         toast.success(message);
+        await signIn("credentials", { email, password });
       }
       if (!res.ok || error) {
         toast.error(error);
