@@ -8,6 +8,12 @@ const nextConfig = {
     NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
     PASSWORD_RESET_URL: process.env.PASSWORD_RESET_URL,
     SIGN_IN_URL: process.env.SIGN_IN_URL,
+    ClOUDINARY_NAME: process.env.ClOUDINARY_NAME,
+    ClOUDINARY_API_KEY: process.env.ClOUDINARY_API_KEY,
+    ClOUDINARY_API_SECRET: process.env.ClOUDINARY_API_SECRET,
+  },
+  images: {
+    domains: ["res.cloudinary.com"],
   },
 };
 
