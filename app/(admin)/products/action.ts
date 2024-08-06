@@ -24,10 +24,10 @@ export const getCloudSignature = async () => {
   );
   return { timestamp, signature };
 };
-export const getCloudConfig = () => {
+export const getCloudConfig = async () => {
   return {
-    name: "dsfttmq45",
-    key: "193438483785419",
+    name: process.env.ClOUDINARY_NAME,
+    key: process.env.ClOUDINARY_API_KEY,
   };
 };
 
