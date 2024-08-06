@@ -12,8 +12,7 @@ const fileSizeValidator = yup
     return true;
   });
 
-// Validation schema for NewProductInfo
-export const newProductInfoSchema = yup.object().shape({
+const commonSchema = {
   title: yup.string().required("Title is required"),
   description: yup.string().required("Description is required"),
   bulletPoints: yup.array().of(yup.string()),
@@ -41,6 +40,14 @@ export const newProductInfoSchema = yup.object().shape({
     .required("Quantity is required")
     .integer("Quantity must be an integer")
     .min(0, "Quantity cannot be negative"),
-  thumbnail: fileSizeValidator.required("Thumbnail is required"),
   images: yup.array().of(fileSizeValidator),
+};
+// Validation schema for NewProductInfo
+export const newProductInfoSchema = yup.object().shape({
+  ...commonSchema,
+  thumbnail: fileSizeValidator.required("Thumbnail is required"),
+});
+
+export const updateProductInfoSchema = yup.object().shape({
+  ...commonSchema,
 });

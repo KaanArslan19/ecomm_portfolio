@@ -23,7 +23,7 @@ export interface Product {
   price: {
     mrp: number;
     salePrice: number;
-    saleOff: number;
+    saleOff?: number;
   };
   category: string;
   quantity: number;

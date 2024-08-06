@@ -13,7 +13,12 @@ const nextConfig = {
     ClOUDINARY_API_SECRET: process.env.ClOUDINARY_API_SECRET,
   },
   images: {
-    domains: ["res.cloudinary.com"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "res.cloudinary.com",
+      },
+    ],
   },
 };
 
