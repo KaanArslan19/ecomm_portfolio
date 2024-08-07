@@ -5,7 +5,7 @@ export const uploadImage = async (file: File) => {
   const cloudConfig = await getCloudConfig();
   const formData = new FormData();
   formData.append("file", file);
-  formData.append("api_key", cloudConfig.key);
+  formData.append("api_key", cloudConfig.key as string);
   formData.append("signature", signature);
   formData.append("timestamp", timestamp.toString());
   const endpoint = `https://api.cloudinary.com/v1_1/${cloudConfig.name}/image/upload`;
@@ -17,4 +17,10 @@ export const uploadImage = async (file: File) => {
 
   const data = await res.json();
   return { url: data.secure_url, id: data.public_id };
+};
+
+export const extractPublicId = (url: string) => {
+  const dataSplit = url.split("/");
+  const lastItem = dataSplit[dataSplit.length - 1];
+  return lastItem.split(".")[0];
 };

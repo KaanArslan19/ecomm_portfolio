@@ -97,3 +97,16 @@ export interface NewCartRequest {
   productId: string;
   quantity: number;
 }
+export interface NewFeaturedProduct {
+  banner: { url: string; id: string };
+  link: string;
+  linkTitle: string;
+  title: string;
+}
+
+export interface FeaturedProductForUpdate {
+  banner?: { url: string; id: string };
+  link: string;
+  linkTitle: string;
+  title: string;
+}
