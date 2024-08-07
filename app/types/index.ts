@@ -92,3 +92,8 @@ export interface ProductToUpdate {
     id: string;
   }[];
 }
+
+export interface NewCartRequest {
+  productId: string;
+  quantity: number;
+}
