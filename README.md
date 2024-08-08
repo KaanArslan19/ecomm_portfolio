@@ -13,7 +13,7 @@
 
 - **Secured User Authentication**: Implemented using NextAuth.js v5 to ensure secure and efficient user login and registration.
 - **Database Management**: Powered by MongoDB, providing a robust and scalable solution for managing data.
-- **Admin Dashboard**: Fully functional with CRUD operations, allowing administrators to manage products, featured products, users, and shopping carts with ease.
+- **Admin Dashboard**: Fully functional with CRUD operations, allowing administrators to manage products, featured products and users with ease.
 - **Mongoose Models**: Created for Products, Featured Products, Users, and Shopping Carts to streamline database interactions.
 
 ## Upcoming Features
