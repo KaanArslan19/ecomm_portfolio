@@ -32,7 +32,7 @@ export interface UpdatePasswordRequest {
 }
 
 export interface SessionUserProfile {
-  id: any;
+  id: string;
   name: string;
   email: string;
   avatar?: string;

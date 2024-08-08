@@ -47,6 +47,7 @@ export default function ProductCard({ product }: Props) {
     });
     const { error } = await res.json();
     if (!res.ok && error) toast.error(error);
+    router.refresh();
   };
   return (
     <Card className="w-full">

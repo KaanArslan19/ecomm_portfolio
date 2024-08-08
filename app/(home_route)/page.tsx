@@ -4,6 +4,7 @@ import GridView from "@components/ui/GridView";
 import startDb from "@lib/db";
 import ProductModel from "@models/productModel";
 import FeaturedProductModel from "@models/featuredProduct";
+import HorizontalMenu from "../components/HorizontalMenu";
 interface LatestProducts {
   id: string;
   title: string;
@@ -56,6 +57,7 @@ export default async function Home() {
   return (
     <div className="py-4 space-y-4">
       <FeaturedProductsSlider products={featuredProducts} />
+      <HorizontalMenu />
       <GridView>
         {parsedProducts.map((product, index) => {
           return <ProductCard key={index} product={product} />;
