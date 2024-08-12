@@ -6,6 +6,7 @@ import { XMarkIcon } from "@heroicons/react/24/outline";
 import { Button } from "@material-tailwind/react";
 import formatPrice from "@utils/formatPrice";
 import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 export interface Product {
   id: string;
@@ -27,9 +28,25 @@ const CartItems: React.FC<CartItemsProps> = ({
   products = [],
   totalQty,
   cartTotal,
+  cartId,
 }) => {
   const [busy, setBusy] = useState(false);
   const router = useRouter();
+
+  const handleCheckOut = async () => {
+    setBusy(true);
+    const res = await fetch("/api/checkout", {
+      method: "POST",
+      body: JSON.stringify({ cartId }),
+    });
+    const { error, url } = await res.json();
+    if (!res.ok) {
+      toast.error(error);
+    } else {
+      window.location.href = url;
+    }
+    setBusy(false);
+  };
   const updateCart = async (productId: string, quantity: number) => {
     setBusy(true);
     await fetch("/api/product/cart", {
@@ -93,6 +110,7 @@ const CartItems: React.FC<CartItemsProps> = ({
           </div>
         </div>
         <Button
+          onClick={handleCheckOut}
           className="shadow-none hover:shadow-none  focus:shadow-none focus:scale-105 active:scale-100"
           color="green"
           disabled={busy}
