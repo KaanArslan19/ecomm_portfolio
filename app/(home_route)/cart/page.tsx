@@ -68,7 +68,6 @@ const fetchCartProducts = async () => {
 
 export default async function Cart() {
   const cart = await fetchCartProducts();
-  console.log(cart);
   if (!cart)
     return (
       <div className="py-4">

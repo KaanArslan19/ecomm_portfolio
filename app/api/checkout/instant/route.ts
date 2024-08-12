@@ -1,4 +1,4 @@
-import { getCartItems } from "@/app/lib/cartHelper";
+import ProductModel from "@/app/models/productModel";
 import { auth } from "@/auth";
 import { isValidObjectId } from "mongoose";
 import { NextResponse } from "next/server";
@@ -19,47 +19,52 @@ export const POST = async (req: Request) => {
         { status: 401 }
       );
     const data = await req.json();
-    const cartId = data.cartId as string;
-    if (!isValidObjectId(cartId))
+    const productId = data.productId as string;
+    if (!isValidObjectId(productId))
       return NextResponse.json(
         {
-          error: "Invalid cart id!",
+          error: "Invalid product id!",
         },
         { status: 401 }
       );
-    const cartItems = await getCartItems(session.user.id, cartId);
-    if (!cartItems)
+    const product = await ProductModel.findById(productId);
+    if (!product)
       return NextResponse.json(
         {
-          error: "Cart Not Found!",
+          error: "Product Not Found!",
         },
         { status: 404 }
       );
-    const line_items = cartItems.products.map((product) => {
-      return {
-        price_data: {
-          currency: "USD",
-          unit_amount: product.price * 100, // convert cents in to 1
-          product_data: {
-            name: product.title,
-            images: [product.thumbnail],
-          },
+    const line_items = {
+      price_data: {
+        currency: "USD",
+        unit_amount: product.price.discounted * 100, // convert cents in to 1
+        product_data: {
+          name: product.title,
+          images: [product.thumbnail.url],
         },
-        quantity: product.qty,
-      };
-    });
+      },
+      quantity: 1,
+    };
 
     const customer = await stripe.customers.create({
       metadata: {
         userId: session.user.id,
-        cartId: cartId,
-        type: "checkout",
+        type: "instant-checkout",
+        product: JSON.stringify({
+          id: productId,
+          title: product.title,
+          price: product.price.discounted,
+          totalPrice: product.price.discounted,
+          thumbnail: product.thumbnail.url,
+          qty: 1,
+        }),
       },
     });
     const params: Stripe.Checkout.SessionCreateParams = {
       mode: "payment",
       payment_method_types: ["card"],
-      line_items,
+      line_items: [line_items],
       success_url: process.env.PAYMENT_SUCCESS_URL!,
       cancel_url: process.env.PAYMENT_CANCEL_URL!,
       shipping_address_collection: { allowed_countries: ["AU", "TR", "US"] },

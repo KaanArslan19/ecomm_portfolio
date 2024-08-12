@@ -37,7 +37,18 @@ export default function ProductCard({ product }: Props) {
   const [isPending, startTransition] = useTransition();
 
   const router = useRouter();
-
+  const handleCheckOut = async () => {
+    const res = await fetch("/api/checkout/instant", {
+      method: "POST",
+      body: JSON.stringify({ productId: product.id }),
+    });
+    const { error, url } = await res.json();
+    if (!res.ok) {
+      toast.error(error);
+    } else {
+      window.location.href = url;
+    }
+  };
   const addToCart = async () => {
     if (!loggedIn) router.push("/auth/signin");
 
@@ -70,10 +81,10 @@ export default function ProductCard({ product }: Props) {
           </div>
           <div className="flex justify-end items-center space-x-2 mb-2">
             <Typography color="blue-gray" className="font-medium line-through">
-              ${formatPrice(product.price.base)}
+              {formatPrice(product.price.base)}
             </Typography>
             <Typography color="blue-gray" className="font-medium">
-              ${formatPrice(product.price.discounted)}
+              {formatPrice(product.price.discounted)}
             </Typography>
           </div>
           <p className="font-normal text-sm opacity-75 line-clamp-3">
@@ -94,6 +105,9 @@ export default function ProductCard({ product }: Props) {
           Add to Cart
         </Button>
         <Button
+          onClick={() => {
+            startTransition(async () => await handleCheckOut());
+          }}
           disabled={isPending}
           ripple={false}
           fullWidth={true}
