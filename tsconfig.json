@@ -24,7 +24,8 @@
       "@types/*": ["./app/types/*"],
       "@components/*": ["./app/components/*"],
       "@models/*": ["./app/models/*"],
-      "@lib/*": ["./app/lib/*"]
+      "@lib/*": ["./app/lib/*"],
+      "@utils/*": ["./app/utils/*"]
     }
   },
   "include": [
