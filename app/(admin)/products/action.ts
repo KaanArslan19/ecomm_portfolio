@@ -32,7 +32,6 @@ export const getCloudConfig = async () => {
 };
 
 export const createProduct = async (info: NewProduct) => {
-  console.log(info);
   try {
     await startDb();
     const newProduct = await ProductModel.create({ ...info });
