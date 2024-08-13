@@ -13,19 +13,12 @@ export interface NewProduct {
   };
   quantity: number;
   category: string;
+  rating?: number;
 }
 
 interface ProductDocument extends NewProduct {
   sale?: number;
 }
-
-const imageSchema = new Schema(
-  {
-    url: { type: String, required: true },
-    id: { type: String, required: true },
-  },
-  { _id: false }
-);
 
 const productSchema = new Schema<ProductDocument>(
   {
@@ -48,6 +41,7 @@ const productSchema = new Schema<ProductDocument>(
     },
     quantity: { type: Number, required: true },
     category: { type: String, enum: [...categories], required: true },
+    rating: Number,
   },
   { timestamps: true }
 );
