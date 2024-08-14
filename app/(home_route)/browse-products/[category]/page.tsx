@@ -2,8 +2,8 @@ import ProductCard from "@components/ProductCard";
 import GridView from "@components/ui/GridView";
 import startDb from "@lib/db";
 import ProductModel from "@models/productModel";
-import FeaturedProductModel from "@models/featuredProduct";
-import HorizontalMenu from "@components/HorizontalMenu";
+
+import CategoryMenu from "@/app/components/ui/CategoryMenu";
 interface LatestProducts {
   id: string;
   title: string;
@@ -46,7 +46,7 @@ export default async function ProductByCategory({ params }: Props) {
 
   return (
     <div className="py-4 space-y-4">
-      <HorizontalMenu />
+      <CategoryMenu />
       {parsedProducts.length ? (
         <GridView>
           {parsedProducts.map((product, index) => {
