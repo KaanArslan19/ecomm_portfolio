@@ -1,8 +1,11 @@
 import ProductView from "@/app/components/ProductView";
 import ReviewsList from "@/app/components/ReviewsList";
+import SimilarProductsList from "@/app/components/SimilarProductsList";
 import startDb from "@/app/lib/db";
+import { updateOrCreateHistory } from "@/app/models/HistoryModel";
 import ReviewModel from "@/app/models/ReviewModel";
 import ProductModel from "@/app/models/productModel";
+import { auth } from "@/auth";
 import { ObjectId, isValidObjectId } from "mongoose";
 import Link from "next/link";
 import { redirect } from "next/navigation";
@@ -18,7 +21,9 @@ const fetchProduct = async (productId: string) => {
   await startDb();
   const product = await ProductModel.findById(productId);
   if (!product) return redirect("/404");
-
+  const session = await auth();
+  if (session?.user)
+    await updateOrCreateHistory(session?.user.id, product._id.toString());
   return JSON.stringify({
     id: product._id.toString(),
     title: product.title,
@@ -53,6 +58,18 @@ const fetchProductReviews = async (productId: string) => {
   }));
   return JSON.stringify(result);
 };
+const fetchSimilarProducts = async () => {
+  await startDb();
+  const products = await ProductModel.find().sort({ rating: -1 }).limit(10);
+  return products.map(({ _id, thumbnail, title, price }) => {
+    return {
+      id: _id.toString(),
+      title,
+      thumbnail: thumbnail.url,
+      price: price.discounted,
+    };
+  });
+};
 export default async function Product({ params }: Props) {
   const { product } = params;
   const productId = product[1];
@@ -62,6 +79,7 @@ export default async function Product({ params }: Props) {
     productImages = productImages.concat(productDetails.images);
   }
   const reviews = await fetchProductReviews(productId);
+  const similarProducts = await fetchSimilarProducts();
   return (
     <div className="p-4">
       <ProductView
@@ -74,6 +92,7 @@ export default async function Product({ params }: Props) {
         rating={productDetails.rating}
         outOfStock={productDetails.outOfStock}
       />
+      <SimilarProductsList products={similarProducts} />{" "}
       <div className="py-4 space-y-4">
         <div className="flex justify-between items-center">
           <h1 className="text-2xl font-semibold mb-2">Reviews</h1>
