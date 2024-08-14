@@ -60,8 +60,8 @@ export default async function Home() {
       <FeaturedProductsSlider products={featuredProducts} />
       <CategoryMenu />
       <GridView>
-        {parsedProducts.map((product, index) => {
-          return <ProductCard key={index} product={product} />;
+        {parsedProducts.map((product) => {
+          return <ProductCard key={product.id} product={product} />;
         })}
       </GridView>
     </div>

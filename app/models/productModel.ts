@@ -16,7 +16,7 @@ export interface NewProduct {
   rating?: number;
 }
 
-interface ProductDocument extends NewProduct {
+export interface ProductDocument extends NewProduct {
   sale?: number;
 }
 
