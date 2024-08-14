@@ -13,7 +13,7 @@ const Empty = () => {
       <path
         fill="none"
         strokeLinejoin="round"
-        stroke-width="32"
+        strokeWidth="32"
         d="M480 208H308L256 48l-52 160H32l140 96-54 160 138-100 138 100-54-160z"
       ></path>
     </svg>
@@ -35,7 +35,7 @@ const Half = () => {
       <path
         fill="none"
         strokeLinejoin="round"
-        stroke-width="32"
+        strokeWidth="32"
         d="M480 208H308L256 48l-52 160H32l140 96-54 160 138-100 138 100-54-160z"
       ></path>
       <path d="M256 48v316L118 464l54-160-140-96h172l52-160z"></path>
