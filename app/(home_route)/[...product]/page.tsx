@@ -5,6 +5,7 @@ import startDb from "@/app/lib/db";
 import { updateOrCreateHistory } from "@/app/models/HistoryModel";
 import ReviewModel from "@/app/models/ReviewModel";
 import ProductModel from "@/app/models/productModel";
+import WishlistModel from "@/app/models/wishlistModel";
 import { auth } from "@/auth";
 import { ObjectId, isValidObjectId } from "mongoose";
 import Link from "next/link";
@@ -21,9 +22,19 @@ const fetchProduct = async (productId: string) => {
   await startDb();
   const product = await ProductModel.findById(productId);
   if (!product) return redirect("/404");
+  let isWishlist = false;
+
   const session = await auth();
-  if (session?.user)
+  if (session?.user) {
     await updateOrCreateHistory(session?.user.id, product._id.toString());
+    const wishlist = await WishlistModel.findOne({
+      user: session.user.id,
+      products: product._id,
+    });
+    console.log("Wishlist Query Result:", wishlist);
+
+    isWishlist = wishlist ? true : false;
+  }
   return JSON.stringify({
     id: product._id.toString(),
     title: product.title,
@@ -35,6 +46,7 @@ const fetchProduct = async (productId: string) => {
     price: product.price,
     sale: product.sale,
     outOfStock: product.quantity <= 0,
+    isWishlist,
   });
 };
 const fetchProductReviews = async (productId: string) => {
@@ -72,12 +84,14 @@ const fetchSimilarProducts = async () => {
 };
 export default async function Product({ params }: Props) {
   const { product } = params;
+
   const productId = product[1];
   const productDetails = JSON.parse(await fetchProduct(productId));
   let productImages = [productDetails.thumbnail];
   if (productDetails.images) {
     productImages = productImages.concat(productDetails.images);
   }
+  console.log("-222", productDetails.wishlist);
   const reviews = await fetchProductReviews(productId);
   const similarProducts = await fetchSimilarProducts();
   return (
@@ -91,6 +105,7 @@ export default async function Product({ params }: Props) {
         points={productDetails.bulletPoints}
         rating={productDetails.rating}
         outOfStock={productDetails.outOfStock}
+        isWishlist={productDetails.isWishlist}
       />
       <SimilarProductsList products={similarProducts} />{" "}
       <div className="py-4 space-y-4">
