@@ -28,7 +28,7 @@ const fetchOrders = async () => {
   return JSON.stringify(result);
 };
 
-export default async function Orders() {
+export default async function OrdersPage() {
   const result = await fetchOrders();
 
   if (!result) {

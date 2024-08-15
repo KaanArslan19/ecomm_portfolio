@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 let connection: typeof mongoose;
-const url = process.env.DB_URL;
+const url = process.env.MONGODB_URI!;
 
 const startDb = async () => {
   try {

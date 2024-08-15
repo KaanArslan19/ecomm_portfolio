@@ -23,7 +23,7 @@ export default function EmailVerificationBanner({ id, verified }: Props) {
   if (verified) return null;
   return (
     <div className="p-2 text-center bg-blue-50">
-      It looks like you haven't verified your email.
+      {`It looks like you haven't verified your email.`}
       <button
         disabled={submitting}
         onClick={applyForReverification}
