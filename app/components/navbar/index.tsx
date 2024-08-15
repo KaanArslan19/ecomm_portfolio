@@ -3,7 +3,6 @@ import NavUI from "./NavUI";
 import { auth } from "@/auth";
 import CartModel from "@/app/models/cartModels";
 import { Types } from "mongoose";
-import { redirect } from "next/navigation";
 import UserModel from "@/app/models/userModel";
 import startDb from "@/app/lib/db";
 
@@ -42,6 +41,7 @@ const getCartItemsCount = async () => {
     return 0;
   }
 };
+export const dynamic = "force-dynamic";
 export default async function Navbar() {
   const cartItemsCount = await getCartItemsCount();
   const profile = await fetchUserProfile();
