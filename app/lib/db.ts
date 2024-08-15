@@ -1,13 +1,13 @@
 import mongoose from "mongoose";
-let connection: typeof mongoose;
+
 const url = process.env.MONGODB_URI!;
 
 const startDb = async () => {
   try {
-    if (!connection) {
-      connection = await mongoose.connect(url!);
+    if (mongoose.connection.readyState === 0) {
+      await mongoose.connect(url);
     }
-    return connection;
+    return mongoose;
   } catch (error) {
     throw new Error((error as any).message);
   }
