@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import ProductCard, { Product } from "@/app/components/ProductCard";
 import SearchFilter from "@/app/components/SearchFilter";
 import GridView from "@/app/components/ui/GridView";
@@ -14,7 +16,6 @@ type options = {
 interface Props {
   searchParams: options;
 }
-export const dynamic = "force-dynamic";
 
 const searchProducts = async (options: options) => {
   const { query, maxRating, minRating, priceSort } = options;
