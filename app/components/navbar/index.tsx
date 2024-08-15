@@ -42,6 +42,7 @@ const getCartItemsCount = async () => {
   }
 };
 export const dynamic = "force-dynamic";
+
 export default async function Navbar() {
   const cartItemsCount = await getCartItemsCount();
   const profile = await fetchUserProfile();

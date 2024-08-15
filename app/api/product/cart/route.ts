@@ -4,6 +4,7 @@ import { NewCartRequest } from "@/app/types";
 import { auth } from "@/auth";
 import { isValidObjectId } from "mongoose";
 import { NextResponse } from "next/server";
+export const dynamic = "force-dynamic";
 
 export const POST = async (req: Request) => {
   try {
@@ -20,7 +21,6 @@ export const POST = async (req: Request) => {
       return NextResponse.json({ error: "Invalid request!" }, { status: 401 });
     await startDb();
     const cart = await CartModel.findOne({ userId: user.id });
-    console.log(cart);
     if (!cart) {
       // creating new cart if there is none
       await CartModel.create({

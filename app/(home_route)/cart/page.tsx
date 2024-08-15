@@ -65,6 +65,7 @@ const fetchCartProducts = async () => {
   ]);
   return cartItems;
 };
+export const dynamic = "force-dynamic";
 
 export default async function Cart() {
   const cart = await fetchCartProducts();
