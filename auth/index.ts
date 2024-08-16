@@ -16,14 +16,11 @@ const authOptions: NextAuthConfig = {
         const { email, password } = credentials as SignInCredentials;
 
         try {
-          const response = await fetch(
-            "http://localhost:3000/api/users/signin",
-            {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({ email, password }),
-            }
-          );
+          const response = await fetch(process.env.API_SIGN_IN_ENDPOINT!, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email, password }),
+          });
           if (!response.ok) {
             throw new Error("Network response was not ok");
           }
