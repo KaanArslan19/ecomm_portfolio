@@ -21,7 +21,6 @@ const nextConfig = {
     API_SIGN_IN_ENDPOINT: process.env.API_SIGN_IN_ENDPOINT,
     MAILTRAP_TOKEN: process.env.MAILTRAP_TOKEN,
     MAILTRAP_ENDPOINT: process.env.MAILTRAP_ENDPOINT,
-    VERIFICATION_URL: process.env.VERIFICATION_URL,
   },
   images: {
     remotePatterns: [
