@@ -18,6 +18,9 @@ const nextConfig = {
     PAYMENT_SUCCESS_URL: process.env.PAYMENT_SUCCESS_URL,
     PAYMENT_CANCEL_URL: process.env.PAYMENT_CANCEL_URL,
     STRIPE_WEBHOOK_SECRET: process.env.STRIPE_WEBHOOK_SECRET,
+    API_SIGN_IN_ENDPOINT: process.env.API_SIGN_IN_ENDPOINT,
+    MAILTRAP_TOKEN: process.env.MAILTRAP_TOKEN,
+    MAILTRAP_ENDPOINT: process.env.MAILTRAP_ENDPOINT,
   },
   images: {
     remotePatterns: [
