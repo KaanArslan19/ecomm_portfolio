@@ -19,7 +19,7 @@ export const POST = async (req: Request) => {
       user: newUser._id,
       token,
     });
-    const verificationUrl = `https://www.nextecommportfoliokaanarslan.xyz/verify?token=${token}&userId=${newUser._id}`;
+    const verificationUrl = `${process.env.VERIFICATION_URL}?token=${token}&userId=${newUser._id}`;
     await sendEmail({
       profile: { name: newUser.name, email: newUser.email },
       subject: "verification",

@@ -80,7 +80,7 @@ export const GET = async (req: Request) => {
       user: userId,
       token,
     });
-    const verificationUrl = `http://localhost:3000/verify?token=${token}&userId=${userId}`;
+    const verificationUrl = `${process.env.VERIFICATION_URL}?token=${token}&userId=${userId}`;
     await sendEmail({
       profile: { name: user.name, email: user.email },
       subject: "verification",
