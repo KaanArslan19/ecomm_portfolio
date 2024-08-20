@@ -33,7 +33,7 @@ export const POST = async (req: Request) => {
     const isMatched = await user.comparePassword(password);
     if (isMatched) {
       return NextResponse.json(
-        { error: "New pasword must be different!" },
+        { error: "New password must be different!" },
         { status: 401 }
       );
     }

@@ -53,12 +53,12 @@ export default function NavUI({ cartItemsCount, avatar }: Props) {
         <div className="flex items-center justify-between text-blue-gray-900">
           <Link
             href="/"
-            className="mr-4 cursor-pointer py-1.5 lg:ml-2 font-semibold"
+            className="mr-2 cursor-pointer py-1.5 lg:ml-2 font-semibold"
           >
             Next Ecom
           </Link>
           <div className="flex-1 flex justify-end">
-            <div className="md:w-96 flex justify-end w-full md:mx-4  ">
+            <div className="md:w-96 flex justify-end w-full md:mx-4 mr-2 ">
               <SearchForm submitTo="/search?query=" />
             </div>
           </div>

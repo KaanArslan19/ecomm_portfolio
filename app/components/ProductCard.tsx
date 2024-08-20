@@ -15,7 +15,7 @@ import formatPrice from "../utils/formatPrice";
 import useAuth from "../hooks/useAuth";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
-import { useTransition } from "react";
+import React, { useTransition } from "react";
 import Rating from "./Rating";
 export interface Product {
   id: string;
@@ -75,17 +75,18 @@ export default function ProductCard({ product }: Props) {
             <Chip color="red" value={`${product.sale}% off`} />
           </div>
         </CardHeader>
-        <CardBody>
+        <CardBody className="mb-2">
           <div className="mb-2">
             <h3 className="line-clamp-1 font-medium text-blue-gray-800">
               {truncate(product.title, 50)}
             </h3>
-            <div className="flex justify-end">
+            <div className="flex justify-end ">
               {product.rating ? (
                 <Rating value={parseFloat(product.rating.toFixed(1))} />
               ) : null}
             </div>
           </div>
+
           <div className="flex justify-end items-center space-x-2 mb-2">
             <Typography color="blue-gray" className="font-medium line-through">
               {formatPrice(product.price.base)}
@@ -94,7 +95,7 @@ export default function ProductCard({ product }: Props) {
               {formatPrice(product.price.discounted)}
             </Typography>
           </div>
-          <p className="font-normal text-sm opacity-75 line-clamp-3">
+          <p className="font-normal text-sm opacity-75 line-clamp-3 ">
             {product.description}
           </p>
         </CardBody>

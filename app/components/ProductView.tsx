@@ -59,7 +59,7 @@ export default function ProductView({
             <div className="uppercase text-gray-700">Out of Stock</div>
           ) : (
             <BuyingOptions wishlist={isWishlist} />
-          )}{" "}
+          )}
         </div>
       </div>
     </div>

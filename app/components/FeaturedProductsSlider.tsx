@@ -7,6 +7,7 @@ import React from "react";
 import Slider, { Settings } from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { useMediaQuery } from "react-responsive";
 
 export interface FeaturedProduct {
   id: string;
@@ -20,20 +21,21 @@ interface Props {
   products: FeaturedProduct[];
 }
 
-const settings: Settings = {
-  dots: true,
-  lazyLoad: "anticipated",
-  infinite: true,
-  speed: 500,
-  slidesToShow: 1,
-  slidesToScroll: 1,
-  arrows: true,
-  autoplay: true,
-};
-
 export default function FeaturedProductsSlider({ products }: Props) {
   const router = useRouter();
-
+  const isMobile = useMediaQuery({
+    query: "(max-width: 768px)",
+  });
+  const settings: Settings = {
+    dots: true,
+    lazyLoad: "anticipated",
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: !isMobile && true,
+    autoplay: true,
+  };
   if (!products.length) return null;
 
   return (
@@ -42,12 +44,12 @@ export default function FeaturedProductsSlider({ products }: Props) {
         {products.map(({ banner, title, link, linkTitle }, index) => {
           return (
             <div className="select-none relative" key={index}>
-              <div className="w-full lg:h-[450px] md:h-[350px] h-[250px]">
+              <div className=" w-full lg:h-[450px] md:h-[350px] h-[250px]">
                 <Image fill src={banner} alt={title} />
               </div>
               <div className="absolute inset-0 p-5">
-                <div className="md:w-1/2 w-full h-full flex flex-col items-start justify-center">
-                  <h1 className="lg:text-3xl md:text-2xl text-lg font-semibold text-left mb-2">
+                <div className="md:w-1/2 w-full h-full flex flex-col items-start justify-between">
+                  <h1 className="lg:text-3xl md:text-2xl text-lg text-white font-semibold text-left mb-2">
                     {title}
                   </h1>
                   <Button color="blue-gray" onClick={() => router.push(link)}>

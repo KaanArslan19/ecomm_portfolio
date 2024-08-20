@@ -105,8 +105,6 @@ const sendUpdatePasswordConfirmation = async (profile: profile) => {
   await client.send({
     from: sender,
     to: recipients,
-    text: `<h1>Your password is now changed <a href=${process.env.SIGN_IN_URL}>click here </a>to sign in</h1>`,
-    category: "Password Reset",
     template_uuid: "780aa589-019f-452d-964b-86d40602bf23",
     template_variables: {
       subject: "Password Reset Successful",
