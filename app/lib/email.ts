@@ -51,9 +51,14 @@ const sendEmailVerificationLink = async (profile: profile, linkUrl: string) => {
   await client.send({
     from: sender,
     to: recipients,
-    subject: "Verify your email!",
-    text: `<h1> Please verify your email by clicking on <a href=${linkUrl}>this link</a> </h1>`,
-    category: "Email Verification",
+    template_uuid: "780aa589-019f-452d-964b-86d40602bf23",
+    template_variables: {
+      subject: "Verify your email!",
+      username: profile.name,
+      company_name: "Next Ecomm by Kaan Arslan",
+      link: linkUrl,
+      btn_title: "Click to Verify Your Email",
+    },
   });
 };
 const sendForgetPasswordLink = async (profile: profile, linkUrl: string) => {
@@ -73,9 +78,14 @@ const sendForgetPasswordLink = async (profile: profile, linkUrl: string) => {
   await client.send({
     from: sender,
     to: recipients,
-    subject: "Forget Password Link",
-    text: `<h1> Click on <a href=${linkUrl}>this link</a> to reset your password </h1>`,
-    category: "Forget Password Link",
+    template_uuid: "780aa589-019f-452d-964b-86d40602bf23",
+    template_variables: {
+      subject: "Forget Password Link",
+      username: profile.name,
+      company_name: "Next Ecomm by Kaan Arslan",
+      link: linkUrl,
+      btn_title: "Click to Reset your password",
+    },
   });
 };
 const sendUpdatePasswordConfirmation = async (profile: profile) => {
@@ -95,9 +105,16 @@ const sendUpdatePasswordConfirmation = async (profile: profile) => {
   await client.send({
     from: sender,
     to: recipients,
-    subject: "Password Reset",
     text: `<h1>Your password is now changed <a href=${process.env.SIGN_IN_URL}>click here </a>to sign in</h1>`,
     category: "Password Reset",
+    template_uuid: "780aa589-019f-452d-964b-86d40602bf23",
+    template_variables: {
+      subject: "Password Reset Successful",
+      username: profile.name,
+      company_name: "Next Ecomm by Kaan Arslan",
+      link: process.env.SIGN_IN_URL!,
+      btn_title: "Sign in",
+    },
   });
 };
 export const sendEmail = (options: EmailOptions) => {
