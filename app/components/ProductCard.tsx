@@ -63,12 +63,12 @@ export default function ProductCard({ product }: Props) {
     router.refresh();
   };
   return (
-    <Card className="w-full">
+    <Card className=" w-full">
       <Link className="w-full" href={`/${product.title}/${product.id}`}>
         <CardHeader
           shadow={false}
           floated={false}
-          className="relative w-full aspect-square m-0"
+          className="relative w-full  h-56 lg:h-72  m-0"
         >
           <Image src={product.thumbnail} alt={product.title} fill />
           <div className="absolute right-0 p-2">
