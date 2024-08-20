@@ -37,12 +37,12 @@ export default function FeaturedProductsSlider({ products }: Props) {
   if (!products.length) return null;
 
   return (
-    <div className="lg:h-[380px] md:h-[300px] h-[250px]">
+    <div className="lg:h-[450px] md:h-[350px] h-[250px]">
       <Slider {...settings}>
         {products.map(({ banner, title, link, linkTitle }, index) => {
           return (
             <div className="select-none relative" key={index}>
-              <div className="w-full lg:h-[380px] md:h-[300px] h-[250px]">
+              <div className="w-full lg:h-[450px] md:h-[350px] h-[250px]">
                 <Image fill src={banner} alt={title} />
               </div>
               <div className="absolute inset-0 p-5">
