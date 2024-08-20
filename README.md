@@ -1,6 +1,6 @@
-# Ecommerce Project
+# Full- Stack E-commerce Project
 
-[Visit the Project](COMING SOON)
+[Visit the Project](https://www.nextecommportfoliokaanarslan.xyz/)
 
 ## Technologies Used
 
